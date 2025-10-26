@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+
+<html data-theme="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Creative Ink Box — Combined Themes</title>
+<meta content="Creative Ink Box — custom invitations, wedding cards &amp; more." name="description"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;family=Poppins:wght@300;400;600&amp;display=swap" rel="stylesheet"/>
+<style>
+    /* ===== Theme variables (both themes) ===== */
+    :root {
+      --container:1200px;
+      --radius:14px;
+      --transition: all 220ms ease;
+      --focus-ring: 0 0 0 4px rgba(200,150,90,0.12);
+      font-family: Poppins, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+    }
+
+    /* Dark theme */
+    :root[data-theme="dark"] {
+      --bg: #1a1410;
+      --panel: #221b17;
+      --muted: #b3b0ad;
+      --text: #f4efe9;
+      --gold: #caa43b;
+      --rose: #e7b07a;
+      --accent-strong: #ffd36b;
+      --link: #f7d391;
+    }
+
+    /* Light theme */
+    :root[data-theme="light"] {
+      --bg: #fffaf6;
+      --panel: #ffffff;
+      --muted: #6b635e;
+      --text: #1b1a18;
+      --gold: #d4a85a;
+      --rose: #e8b49a;
+      --accent-strong: #f4c98a;
+      --link: #c77b6b;
+    }
+
+    /* ===== Base layout ===== */
+    html,body{height:100%;}
+    body{margin:0;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.45}
+    .wrap{max-width:var(--container);margin:0 auto;padding:28px}
+
+    header{display:flex;align-items:center;justify-content:space-between;padding:12px 0;gap:12px}
+    .brand{display:flex;align-items:center;gap:14px}
+    .brand img{width:64px;height:64px;object-fit:contain;border-radius:12px;background:transparent;padding:6px}
+    .brand h1{font-family:'Playfair Display',serif;font-size:20px;margin:0;color:var(--text)}
+    .tag{font-size:13px;color:var(--muted);margin-top:2px}
+    nav a{margin-left:18px;text-decoration:none;color:var(--muted);font-weight:600}
+    nav a:hover{color:var(--link)}
+
+    /* Theme toggle */
+    .header-right{display:flex;align-items:center;gap:12px}
+    .theme-toggle{cursor:pointer;font-size:20px;width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;transition:var(--transition);background:transparent;border:1px solid rgba(255,255,255,0.02)}
+    .theme-toggle:focus{outline:none;box-shadow:var(--focus-ring)}
+    .theme-toggle .sun,.theme-toggle .moon{display:none}
+    :root[data-theme="light"] .sun{display:inline-block}
+    :root[data-theme="dark"] .moon{display:inline-block}
+
+    /* Hero / Preview */
+    .hero{display:flex;gap:36px;align-items:center;padding:32px 0}
+    .hero .left{flex:1}
+    h2{font-family:'Playfair Display',serif;margin:0;font-size:34px;line-height:1.05;color:var(--text)}
+    p.lead{color:var(--muted);margin-top:12px;font-size:15px}
+    .cta{margin-top:18px;display:flex;gap:12px}
+    .btn{background:linear-gradient(90deg,var(--gold),var(--rose));color:var(--panel);padding:10px 16px;border-radius:10px;text-decoration:none;font-weight:700;box-shadow:0 10px 30px rgba(0,0,0,0.08)}
+    .btn.alt{background:transparent;border:2px solid rgba(0,0,0,0.06);color:var(--text)}
+    .mock{flex:1;display:flex;align-items:center;justify-content:center}
+    .preview{width:320px;height:420px;border-radius:18px;box-shadow:0 20px 50px rgba(0,0,0,0.25);display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.03);overflow:hidden;background:var(--panel);position:relative}
+    .preview .placeholder{color:var(--muted);font-weight:600;text-align:center;padding:12px}
+
+    /* Sections */
+    .section{padding:28px 0}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+    .service{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:18px;border-radius:12px;border:1px solid rgba(0,0,0,0.04)}
+    .service h3{margin:0 0 8px 0;color:var(--text)}
+    .service p{margin:0;color:var(--muted);font-size:14px}
+
+    /* Portfolio */
+    .portfolio-category{font-size:18px;margin:14px 0;color:var(--gold);display:inline-block;padding-bottom:6px;border-bottom:2px solid rgba(0,0,0,0.04)}
+    .category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:12px}
+    .box{background:var(--panel);padding:12px;border-radius:12px;border:1px solid rgba(0,0,0,0.04);min-height:160px;display:flex;flex-direction:column}
+    .scroll-row{display:flex;gap:12px;overflow-x:auto;padding:6px 2px;scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
+    .thumb{flex:0 0 auto;width:220px;height:140px;border-radius:10px;overflow:hidden;background:#111;display:flex;align-items:center;justify-content:center;position:relative;border:1px solid rgba(255,255,255,0.02);cursor:pointer}
+    .thumb img,.thumb video{width:100%;height:100%;object-fit:cover;display:block}
+    .thumb .overlay{position:absolute;inset:0;border-radius:10px;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,0.18));pointer-events:none}
+    .thumb:focus{outline:none;box-shadow:var(--focus-ring)}
+    .thumb:hover{transform:translateY(-6px);transition:var(--transition)}
+
+    /* Lightbox */
+    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.75);display:flex;align-items:center;justify-content:center;padding:22px;z-index:60;visibility:hidden;opacity:0;transition:opacity 220ms ease}
+    .lightbox.show{visibility:visible;opacity:1}
+    .lightbox-inner{max-width:1100px;width:100%;background:var(--panel);border-radius:12px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.02)}
+    .lightbox-media{width:100%;height:70vh;display:flex;align-items:center;justify-content:center;background:#000}
+    .lightbox-media img,.lightbox-media video{max-width:100%;max-height:100%;object-contain}
+    .lb-close{position:absolute;right:18px;top:18px;background:rgba(255,255,255,0.04);border-radius:8px;padding:6px 8px;border:none;color:var(--text);font-weight:700}
+    .lb-nav{position:absolute;left:18px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.04);border-radius:8px;padding:6px 8px;border:none;color:var(--text)}
+    .lb-nav.right{left:auto;right:18px}
+
+    /* Contact */
+    .contact{background:var(--panel);padding:18px;border-radius:12px;border:1px solid rgba(0,0,0,0.04)}
+    input,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:transparent;color:var(--text);font-family:inherit}
+    button[type="submit"]{background:linear-gradient(90deg,var(--gold),var(--rose));color:var(--panel);padding:10px 12px;border-radius:10px;border:none;font-weight:700}
+    footer{padding:22px 0;border-top:1px solid rgba(0,0,0,0.04);display:flex;justify-content:space-between;align-items:center}
+    .small{font-size:13px;color:var(--muted)}
+
+    /* Responsive tweaks */
+    @media (max-width:900px){
+      .hero{flex-direction:column}
+      .preview{width:260px;height:360px}
+      .thumb{width:160px;height:100px}
+      .lightbox-media{height:55vh}
+    }
+    @media (max-width:460px){
+      nav{display:none}
+      .brand img{width:52px;height:52px}
+    }
+  
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="brand">
+<img alt="Creative Ink Box logo" onerror="this.style.display='none'" src="logo.png"/>
+<div>
+<h1>Creative Ink Box</h1>
+<div class="tag">Designs for Every Occasion</div>
+</div>
+</div>
+<div class="header-right">
+<nav>
+<a href="#services">Services</a>
+<a href="#portfolio">Portfolio</a>
+<a href="#contact">Contact</a>
+</nav>
+<!-- Theme toggle (sun/moon) -->
+<div aria-label="Toggle theme" class="theme-toggle" id="themeToggle" role="button" tabindex="0">
+<span aria-hidden="true" class="sun">☀️</span>
+<span aria-hidden="true" class="moon">🌙</span>
+</div>
+</div>
+</header>
+<main>
+<section class="hero">
+<div class="left">
+<h2>Custom invitations, cards — handcrafted with style.</h2>
+<p class="lead">Weddings, birthdays, corporate invites and more. Fast turnaround &amp; premium finishes.</p>
+<div class="cta">
+<a class="btn" href="#contact">Get a Quote</a>
+<a class="btn alt" href="#portfolio">See Portfolio</a>
+</div>
+</div>
+<div class="mock">
+<!-- Artwork preview: will be populated with a random portfolio media on page load -->
+<div aria-live="polite" class="preview" id="artwork-preview">
+<div class="placeholder">Loading preview…</div>
+</div>
+</div>
+</section>
+<section class="section" id="services">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap">
+<h3 style="margin:0">What I design</h3>
+<div class="small">Custom packages • Fast replies</div>
+</div>
+<div class="grid" style="margin-top:16px">
+<div class="service"><h3>Wedding Invites</h3><p>Elegant suites, RSVP cards, save-the-dates, printed or digital.</p></div>
+<div class="service"><h3>Birthday &amp; Event Cards</h3><p>Fun, modern and themed designs for all ages and celebrations.</p></div>
+<div class="service"><h3>Corporate &amp; Branding</h3><p>Minimal invites, corporate event cards and branded stationery.</p></div>
+<div class="service"><h3>Custom Projects</h3><p>Menus, thank-you cards, stickers, and bespoke prints — just ask!</p></div>
+</div>
+</section>
+<section class="section" id="portfolio">
+<h3 style="margin:0 0 12px 0">Portfolio</h3>
+<h4 class="portfolio-category">💍 Wedding Invitation Cards</h4>
+<div class="category-grid"><div class="box">
+<div class="scroll-row">
+<div aria-label="Open media" class="thumb" data-src="images/card_box1_1.jpg" data-type="image" tabindex="0"><img alt="card1-1" loading="lazy" src="images/card_box1_1.jpg"/><div class="overlay"></div></div>
+<div aria-label="Open media" class="thumb" data-src="videos/card_box1_2.mp4" data-type="video" tabindex="0"><video loop="" muted="" playsinline="" poster="images/card_box1_2_thumb.jpg" preload="metadata"></video><div class="overlay"></div></div>
+<div aria-label="Open media" class="thumb" data-src="images/card_box1_3.jpg" data-type="image" tabindex="0"><img alt="card1-3" loading="lazy" src="images/card_box1_3.jpg"/><div class="overlay"></div></div>
+</div>
+</div>
+<div class="box">
+<div class="scroll-row">
+<div aria-label="Open media" class="thumb" data-src="images/card_box1_1.jpg" data-type="image" tabindex="0"><img alt="card1-1" loading="lazy" src="images/card_box1_1.jpg"/><div class="overlay"></div></div>
+<div aria-label="Open media" class="thumb" data-src="videos/card_box1_2.mp4" data-type="video" tabindex="0"><video loop="" muted="" playsinline="" poster="images/card_box1_2_thumb.jpg" preload="metadata"></video><div class="overlay"></div></div>
+<div aria-label="Open media" class="thumb" data-src="images/card_box1_3.jpg" data-type="image" tabindex="0"><img alt="card1-3" loading="lazy" src="images/card_box1_3.jpg"/><div class="overlay"></div></div>
+</div>
+</div>
+<div class="box">
+<div class="scroll-row">
+<div aria-label="Open media" class="thumb" data-src="images/card_box1_1.jpg" data-type="image" tabindex="0"><img alt="card1-1" loading="lazy" src="images/card_box1_1.jpg"/><div class="overlay"></div></div>
+<div aria-label="Open media" class="thumb" data-src="videos/card_box1_2.mp4" data-type="video" tabindex="0"><video loop="" muted="" playsinline="" poster="images/card_box1_2_thumb.jpg" preload="metadata"></video><div class="overlay"></div></div>
+<div aria-label="Open media" class="thumb" data-src="images/card_box1_3.jpg" data-type="image" tabindex="0"><img alt="card1-3" loading="lazy" src="images/card_box1_3.jpg"/><div class="overlay"></div></div>
+</div>
+</div>
+<div class="box">
+<div class="scroll-row">
+<div aria-label="Open media" class="thumb" data-src="images/card_box1_1.jpg" data-type="image" tabindex="0"><img alt="card1-1" loading="lazy" src="images/card_box1_1.jpg"/><div class="overlay"></div></div>
+<div aria-label="Open media" class="thumb" data-src="videos/card_box1_2.mp4" data-type="video" tabindex="0"><video loop="" muted="" playsinline="" poster="images/card_box1_2_thumb.jpg" preload="metadata"></video><div class="overlay"></div></div>
+<div aria-label="Open media" class="thumb" data-src="images/card_box1_3.jpg" data-type="image" tabindex="0"><img alt="card1-3" loading="lazy" src="images/card_box1_3.jpg"/><div class="overlay"></div></div>
+</div>
+</div>
+<div class="box">
+<div class="scroll-row">
+<div aria-label="Open media" class="thumb" data-src="images/card_box1_1.jpg" data-type="image" tabindex="0"><img alt="card1-1" loading="lazy" src="images/card_box1_1.jpg"/><div class="overlay"></div></div>
+<div aria-label="Open media" class="thumb" data-src="videos/card_box1_2.mp4" data-type="video" tabindex="0"><video loop="" muted="" playsinline="" poster="images/card_box1_2_thumb.jpg" preload="metadata"></video><div class="overlay"></div></div>
+<div aria-label="Open media" class="thumb" data-src="images/card_box1_3.jpg" data-type="image" tabindex="0"><img alt="card1-3" loading="lazy" src="images/card_box1_3.jpg"/><div class="overlay"></div></div>
+</div>
+</div>
+<div class="box">
+<div class="scroll-row">
+<div aria-label="Open media" class="thumb" data-src="images/card_box1_1.jpg" data-type="image" tabindex="0"><img alt="card1-1" loading="lazy" src="images/card_box1_1.jpg"/><div class="overlay"></div></div>
+<div aria-label="Open media" class="thumb" data-src="videos/card_box1_2.mp4" data-type="video" tabindex="0"><video loop="" muted="" playsinline="" poster="images/card_box1_2_thumb.jpg" preload="metadata"></video><div class="overlay"></div></div>
+<div aria-label="Open media" class="thumb" data-src="images/card_box1_3.jpg" data-type="image" tabindex="0"><img alt="card1-3" loading="lazy" src="images/card_box1_3.jpg"/><div class="overlay"></div></div>
+</div>
+</div></div>
+<h4 class="portfolio-category" style="margin-top:22px">💌 Wedding Invitation Videos</h4>
+<div class="category-grid"><div class="box">
+<div class="scroll-row">
+<div aria-label="Open media" class="thumb" data-src="images/card_video1_1.jpg" data-type="image" tabindex="0"><img alt="card1-1" loading="lazy" src="images/card_video1_1.jpg"/><div class="overlay"></div></div>
+<div aria-label="Open media" class="thumb" data-src="videos/card_video1_2.mp4" data-type="video" tabindex="0"><video loop="" muted="" playsinline="" poster="images/card_video1_2_thumb.jpg" preload="metadata"></video><div class="overlay"></div></div>
+<div aria-label="Open media" class="thumb" data-src="images/card_video1_3.jpg" data-type="image" tabindex="0"><img alt="card1-3" loading="lazy" src="images/card_video1_3.jpg"/><div class="overlay"></div></div>
+</div>                                                           
+</div>                                                           
+<div class="box">                                                
+<div class="scroll-row">                                         
+<div aria-label="Open media" class="thumb" data-src="images/card_video1_1.jpg" data-type="image" tabindex="0"><img alt="card1-1" loading="lazy" src="images/card_video1_1.jpg"/><div class="overlay"></div></div>
+<div aria-label="Open media" class="thumb" data-src="videos/card_video1_2.mp4" data-type="video" tabindex="0"><video loop="" muted="" playsinline="" poster="images/card_video1_2_thumb.jpg" preload="metadata"></video><div class="overlay"></div></div>
+<div aria-label="Open media" class="thumb" data-src="images/card_video1_3.jpg" data-type="image" tabindex="0"><img alt="card1-3" loading="lazy" src="images/card_video1_3.jpg"/><div class="overlay"></div></div>
+</div>                                                           
+</div>                                                           
+<div class="box">                                                
+<div class="scroll-row">                                         
+<div aria-label="Open media" class="thumb" data-src="images/card_video1_1.jpg" data-type="image" tabindex="0"><img alt="card1-1" loading="lazy" src="images/card_video1_1.jpg"/><div class="overlay"></div></div>
+<div aria-label="Open media" class="thumb" data-src="videos/card_video1_2.mp4" data-type="video" tabindex="0"><video loop="" muted="" playsinline="" poster="images/card_video1_2_thumb.jpg" preload="metadata"></video><div class="overlay"></div></div>
+<div aria-label="Open media" class="thumb" data-src="images/card_video1_3.jpg" data-type="image" tabindex="0"><img alt="card1-3" loading="lazy" src="images/card_video1_3.jpg"/><div class="overlay"></div></div>
+</div>                                                           
+</div>                                                           
+<div class="box">                                                
+<div class="scroll-row">                                         
+<div aria-label="Open media" class="thumb" data-src="images/card_video1_1.jpg" data-type="image" tabindex="0"><img alt="card1-1" loading="lazy" src="images/card_video1_1.jpg"/><div class="overlay"></div></div>
+<div aria-label="Open media" class="thumb" data-src="videos/card_video1_2.mp4" data-type="video" tabindex="0"><video loop="" muted="" playsinline="" poster="images/card_video1_2_thumb.jpg" preload="metadata"></video><div class="overlay"></div></div>
+<div aria-label="Open media" class="thumb" data-src="images/card_video1_3.jpg" data-type="image" tabindex="0"><img alt="card1-3" loading="lazy" src="images/card_video1_3.jpg"/><div class="overlay"></div></div>
+</div>                                                           
+</div>                                                           
+<div class="box">                                                
+<div class="scroll-row">                                         
+<div aria-label="Open media" class="thumb" data-src="images/card_video1_1.jpg" data-type="image" tabindex="0"><img alt="card1-1" loading="lazy" src="images/card_video1_1.jpg"/><div class="overlay"></div></div>
+<div aria-label="Open media" class="thumb" data-src="videos/card_video1_2.mp4" data-type="video" tabindex="0"><video loop="" muted="" playsinline="" poster="images/card_video1_2_thumb.jpg" preload="metadata"></video><div class="overlay"></div></div>
+<div aria-label="Open media" class="thumb" data-src="images/card_video1_3.jpg" data-type="image" tabindex="0"><img alt="card1-3" loading="lazy" src="images/card_video1_3.jpg"/><div class="overlay"></div></div>
+</div>                                                           
+</div>                                                           
+<div class="box">                                                
+<div class="scroll-row">                                         
+<div aria-label="Open media" class="thumb" data-src="images/card_video1_1.jpg" data-type="image" tabindex="0"><img alt="card1-1" loading="lazy" src="images/card_video1_1.jpg"/><div class="overlay"></div></div>
+<div aria-label="Open media" class="thumb" data-src="videos/card_video1_2.mp4" data-type="video" tabindex="0"><video loop="" muted="" playsinline="" poster="images/card_video1_2_thumb.jpg" preload="metadata"></video><div class="overlay"></div></div>
+<div aria-label="Open media" class="thumb" data-src="images/card_video1_3.jpg" data-type="image" tabindex="0"><img alt="card1-3" loading="lazy" src="images/card_video1_3.jpg"/><div class="overlay"></div></div>
+</div>
+</div></div>
+</section>
+<section class="section" id="contact">
+<h3 style="margin:0">Contact &amp; Orders</h3>
+<div style="margin-top:12px;display:grid;grid-template-columns:1fr 360px;gap:18px;align-items:start">
+<div class="contact-info">
+  <p class="small">
+    
+    <i class="fab fa-instagram"></i>
+    <a href="https://instagram.com/official.creativeinkbox" target="_blank">@official.creativeinkbox</a> &nbsp;|&nbsp;
+    <i class="fas fa-envelope"></i>
+    <a href="mailto:official.creativeinkbox@gmail.com">official.creativeinkbox@gmail.com</a> &nbsp;|&nbsp;
+    <i class="fab fa-whatsapp"></i>
+    <a href="https://wa.me/91975541097" target="_blank">+91 975541097</a>
+  </p>
+
+  <ul class="delivery-info">
+    <li><strong>Standard delivery:</strong> 3–5 business days</li>
+    <li><strong>Express delivery:</strong> 24–48 hours <em>(add-on)</em></li>
+  </ul>
+</div>
+<div class="contact">
+<!-- Formspree form: replace YOUR_FORM_ID with your Formspree form id -->
+<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+<div style="display:flex;flex-direction:column;gap:8px">
+<input name="name" placeholder="Your name" required=""/>
+<input name="_replyto" placeholder="Email or phone" required=""/>
+<textarea name="message" placeholder="Short project brief" required="" rows="4"></textarea>
+<button type="submit">Send</button>
+<div class="small" style="margin-top:6px;color:var(--muted)">Form powered by Formspree — replace YOUR_FORM_ID in the action URL.</div>
+</div>
+</form>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<div>© <span id="year"></span> Creative Ink Box</div>
+<div class="social">
+<a href="https://instagram.com/Official.CreativeInkBox" style="color:var(--muted);text-decoration:none;margin-left:12px" target="_blank">Instagram</a>
+<a href="https://wa.me/91975541097" style="color:var(--muted);text-decoration:none;margin-left:12px" target="_blank">WhatsApp</a>
+</div>
+</footer>
+</div>
+<!-- Lightbox -->
+<div aria-hidden="true" class="lightbox" id="lightbox">
+<div aria-modal="true" class="lightbox-inner" role="dialog">
+<button aria-label="Close" class="lb-close" id="lb-close">✕</button>
+<button aria-label="Previous" class="lb-nav" id="lb-prev">◀</button>
+<button aria-label="Next" class="lb-nav right" id="lb-next">▶</button>
+<div class="lightbox-media" id="lb-media"></div>
+<div id="lb-caption" style="padding:12px;color:var(--muted)"></div>
+</div>
+</div>
+<script>
+    // set year
+window.addEventListener('resize', () => {
+  const current = document.documentElement.getAttribute('data-theme');
+  document.documentElement.setAttribute('data-theme', current);
+});
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Theme toggle + remember preference
+    (function(){
+      const root = document.documentElement;
+      const toggle = document.getElementById('themeToggle');
+      const stored = localStorage.getItem('theme');
+      if(stored) root.setAttribute('data-theme', stored);
+      else {
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        root.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+      }
+      toggle.addEventListener('click', toggleTheme);
+      toggle.addEventListener('keydown', (e)=> { if(e.key==='Enter' || e.key===' ') toggleTheme(); });
+      function toggleTheme(){
+        const current = root.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+      }
+    })();
+
+    // Collect thumbnails, initialize video thumbs and IntersectionObserver
+    (function(){
+      const thumbEls = Array.from(document.querySelectorAll('.thumb'));
+      const media = thumbEls.map(t => ({ src: t.dataset.src, type: t.dataset.type || 'image', alt: t.querySelector('img')?.alt || '' }));
+
+      // Initialize video elements (set src) and click handlers
+      thumbEls.forEach((t,i) => {
+        const m = media[i];
+        if(m.type === 'video') {
+          const v = t.querySelector('video');
+          if(v) {
+            v.src = m.src;
+            v.muted = true;
+            v.loop = true;
+            v.playsInline = true;
+            v.preload = 'metadata';
+            // try to pause initially
+            v.pause();
+          }
+        }
+        t.addEventListener('click', ()=> openLightbox(i));
+        t.addEventListener('keydown', (e)=> { if(e.key==='Enter' || e.key===' ') openLightbox(i); });
+      });
+
+      // IntersectionObserver to autoplay video thumbs when >=50% visible
+      const io = new IntersectionObserver(entries=>{
+        entries.forEach(ent=>{
+          const el = ent.target;
+          const idx = thumbEls.indexOf(el);
+          if(idx === -1) return;
+          const m = media[idx];
+          if(m.type === 'video') {
+            const vid = el.querySelector('video');
+            if(ent.isIntersecting) {
+              vid.play().catch(()=>{});
+            } else {
+              vid.pause();
+              try{ vid.currentTime = 0; } catch(e){}
+            }
+          }
+        });
+      }, { threshold: 0.5 });
+
+      thumbEls.forEach(t => io.observe(t));
+
+      // Randomize artwork preview using the media array
+      const previewBox = document.getElementById('artwork-preview');
+      function setRandomPreview(){
+        if(media.length === 0) {
+          previewBox.innerHTML = '<div class="placeholder">No preview available</div>';
+          return;
+        }
+        const idx = Math.floor(Math.random() * media.length);
+        const item = media[idx];
+        previewBox.innerHTML = '';
+        if(item.type === 'video') {
+          const v = document.createElement('video');
+          v.src = item.src;
+          v.autoplay = true;
+          v.muted = true;
+          v.loop = true;
+          v.playsInline = true;
+          v.style.width = '100%';
+          v.style.height = '100%';
+          v.style.objectFit = 'cover';
+          previewBox.appendChild(v);
+        } else {
+          const img = document.createElement('img');
+          img.src = item.src;
+          img.alt = item.alt || 'Artwork preview';
+          img.style.width = '100%';
+          img.style.height = '100%';
+          img.style.objectFit = 'cover';
+          previewBox.appendChild(img);
+        }
+      }
+
+      // Set a preview on load and on each reload it's random
+      document.addEventListener('DOMContentLoaded', setRandomPreview);
+
+      // Lightbox implementation
+      const lb = document.getElementById('lightbox');
+      const lbMedia = document.getElementById('lb-media');
+      const lbCaption = document.getElementById('lb-caption');
+      const lbClose = document.getElementById('lb-close');
+      const lbPrev = document.getElementById('lb-prev');
+      const lbNext = document.getElementById('lb-next');
+      let idx = 0;
+
+      function openLightbox(i){
+        idx = i;
+        show();
+        lb.classList.add('show');
+        lb.setAttribute('aria-hidden','false');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeLightbox(){
+        lb.classList.remove('show');
+        lb.setAttribute('aria-hidden','true');
+        lbMedia.innerHTML = '';
+        document.body.style.overflow = 'auto';
+      }
+      function show(){
+        lbMedia.innerHTML = '';
+        const item = media[idx];
+        lbCaption.textContent = item.alt || item.src.split('/').pop();
+        if(item.type === 'video') {
+          const v = document.createElement('video');
+          v.src = item.src;
+          v.controls = true;
+          v.autoplay = true;
+          v.playsInline = true;
+          v.style.maxWidth = '100%';
+          v.style.maxHeight = '100%';
+          lbMedia.appendChild(v);
+        } else {
+          const img = document.createElement('img');
+          img.src = item.src;
+          img.alt = item.alt || '';
+          img.style.maxWidth = '100%';
+          img.style.maxHeight = '100%';
+          lbMedia.appendChild(img);
+        }
+      }
+
+      lbClose.addEventListener('click', closeLightbox);
+      lbPrev.addEventListener('click', ()=> { idx = (idx - 1 + media.length) % media.length; show(); });
+      lbNext.addEventListener('click', ()=> { idx = (idx + 1) % media.length; show(); });
+      lb.addEventListener('click', (e)=> { if(e.target === lb) closeLightbox(); });
+      window.addEventListener('keydown', (e)=> {
+        if(lb.classList.contains('show')) {
+          if(e.key === 'Escape') closeLightbox();
+          if(e.key === 'ArrowRight') lbNext.click();
+          if(e.key === 'ArrowLeft') lbPrev.click();
+        }
+      });
+
+    })(); // end thumbs IIFE
+
+  </script>
+</body>
+</html>
